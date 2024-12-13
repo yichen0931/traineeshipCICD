@@ -19,5 +19,20 @@ jobs:
         run: |
           go version
           ls
-          go test
+          go test -cover
+
+      - name: Checkout private repo remotely
+        uses: actions/checkout@v4
+        with:
+          repository: yichen0931/pandaHidden
+          path: hiddenFolder
+          token: ${{ secrets.pandaHidden}}
+
+      - name: List out hidden things
+        run: |
+          ls
+          cd hiddenFolder
+          ls
+        
+          
           
