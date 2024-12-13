@@ -1,0 +1,38 @@
+name: My Panda CI flow 2
+on:
+  push: 
+    branches: [main]
+
+jobs:
+  builds:
+    runs-on: ubuntu-20.04
+    name: my second build
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Setup Go
+        uses: actions/setup-go@v5.2.0
+        with:
+          go-version: 1.17.0
+
+      - name: what is go version in this branch
+        run: |
+          go version
+          ls
+          go test -cover
+
+      - name: Checkout private repo remotely
+        uses: actions/checkout@v4
+        with:
+          repository: yichen0931/pandaHidden
+          path: hiddenFolder
+          token: ${{ secrets.pandaHidden}}
+
+      - name: List out hidden things
+        run: |
+          ls
+          cd hiddenFolder
+          ls
+        
+          
+          
